@@ -40,4 +40,5 @@ class MedicalCenterResource(Resource):
                 name=args.name,
                 website=args.website,
                 contact_methods=args.contact_methods))
+        db.session.commit()
         return jsonify({'success': 1})
