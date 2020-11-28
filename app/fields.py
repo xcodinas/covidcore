@@ -49,6 +49,7 @@ user_fields = {
 }
 
 medical_center_fields = {
+    'id': fields.Integer,
     'location': fields.String,
     'name': fields.String,
     'website': fields.String,
@@ -56,12 +57,14 @@ medical_center_fields = {
 }
 
 answer_fields = {
+    'id': fields.Integer,
     'answer': fields.String,
     'user': fields.Nested(user_fields),
     'average_rating': fields.Float,
 }
 
 question_fields = {
+    'id': fields.Integer,
     'title': fields.String,
     'question': fields.String,
     'user': fields.Nested(user_fields),
