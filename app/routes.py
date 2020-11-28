@@ -87,11 +87,6 @@ def register():
         return abort(400, message={'email': 'This email is not valid'})
     elif not valid_username(args.username):
         return abort(400, message={'username': 'This username is not valid'})
-    elif ReservedUsername.query.filter_by(username=args.username).filter(
-            (ReservedUsername.email != args.email) | (
-            ReservedUsername.email == None)).count():
-        return abort(400, message={
-                'username': 'This username is already registered'})
 
     user = User(
         username=args.username,
