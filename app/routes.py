@@ -54,7 +54,6 @@ def login():
     add_token_to_database(refresh_token, app.config['JWT_IDENTITY_CLAIM'])
     return jsonify(
         user=marshal(user, user_fields),
-        firebase_token=get_firebase_token(user),
         access_token=access_token,
         refresh_token=refresh_token), 200
 
