@@ -6,6 +6,8 @@ from app.utils import get_ip_location
 from app.fields import string, medical_center_fields
 from app.models import MedicalCenter
 
+from app import db
+
 medical_center_parser = reqparse.RequestParser()
 medical_center_parser.add_argument('location', type=string(empty=False))
 
