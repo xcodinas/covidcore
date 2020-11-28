@@ -44,7 +44,7 @@ class UserResource(Resource):
         user = current_user()
         if not args.user:
             users = User.query.all()
-            return [get_user_fields(user=u, to_user=user) for u in users]
+            return [marshal(u, user_fields) for u in users]
         query = User.query.filter_by(username=args.user)
         try:
             int(args.user)
@@ -60,7 +60,7 @@ class MeResource(Resource):
 
     def get(self):
         user = current_user()
-        return get_user_fields(user, private=True, with_invite=True)
+        return marshal(user, user_fields)
 
     def put(self):
         user = current_user()

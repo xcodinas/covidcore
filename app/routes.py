@@ -53,7 +53,7 @@ def login():
     add_token_to_database(access_token, app.config['JWT_IDENTITY_CLAIM'])
     add_token_to_database(refresh_token, app.config['JWT_IDENTITY_CLAIM'])
     return jsonify(
-        user=get_user_fields(user, private=True, with_invite=True),
+        user=marshal(user, user_fields),
         firebase_token=get_firebase_token(user),
         access_token=access_token,
         refresh_token=refresh_token), 200
@@ -101,7 +101,7 @@ def register():
         email=args.email)
     db.session.add(user)
     db.session.commit()
-    return get_user_fields(user, private=True, with_invite=True)
+    return marshal(user, user_fields)
 
 
 # Token stuff
