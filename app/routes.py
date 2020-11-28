@@ -5,7 +5,7 @@ from flask_restful import reqparse, marshal
 
 from app import app, db
 from app.exceptions import TokenNotFound
-from app.models import User
+from app.models import User, TokenBlacklist
 from app.fields import user_fields, string
 from app.utils import (current_user, valid_email, get_user_tokens,
     add_token_to_database, revoke_token, unrevoke_token, unaccent_sql,

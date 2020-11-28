@@ -7,7 +7,7 @@ from flask_jwt_extended import jwt_required
 from flask_mail import Message as MailMessage
 
 from app import db, mail
-from app.models import User
+from app.models import User, TokenBlacklist
 from app.utils import (current_user, str2bool, abort, valid_username,
     valid_email)
 from app.fields import user_fields, string

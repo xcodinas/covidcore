@@ -13,7 +13,7 @@ from flask_jwt_extended import get_jwt_identity, decode_token, \
 from flask_restful import marshal
 
 from app import db, app, jwt, babel
-from app.models import User
+from app.models import User, TokenBlacklist
 from app.fields import user_fields
 from app.exceptions import TokenNotFound
 
