@@ -7,7 +7,6 @@ from functools import wraps, lru_cache
 from sqlalchemy.sql.expression import true
 from sqlalchemy.sql import func
 from sqlalchemy import cast
-from sentry_sdk import configure_scope
 from flask import request, jsonify
 from flask_jwt_extended import get_jwt_identity, decode_token, \
     verify_jwt_in_request_optional
