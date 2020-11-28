@@ -4,7 +4,8 @@ from flask_restful import Resource, reqparse, marshal_with, marshal
 from flask import jsonify
 from flask_jwt_extended import jwt_required
 
-from app.utils import abort, needs_expert, current_user, str2bool
+from app.utils import (abort, needs_expert,
+    current_user_or_none as current_user, str2bool)
 from app.fields import string, question_fields
 from app.models import CovidQuestion, CovidAnswer, AnswerRating
 

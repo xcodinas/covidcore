@@ -96,6 +96,12 @@ def current_user():
     return user
 
 
+def current_user_or_none():
+    user = User.query.filter_by(id=get_jwt_identity()).first()
+    if not user:
+        return None
+
+
 @lru_cache(99999)
 def str2bool(v):
     if isinstance(v, bool):

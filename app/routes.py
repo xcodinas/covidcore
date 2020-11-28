@@ -147,3 +147,9 @@ def modify_token(token_id):
             return jsonify({'msg': 'Token unrevoked'}), 200
     except TokenNotFound:
         return jsonify({'msg': 'The specified token was not found'}), 404
+
+
+@app.route('/chatbot', methods=['GET'])
+def get_bot_response():
+    text = request.args.get('message')
+    return jsonify({'response': str(chatbot.get_response(text))})

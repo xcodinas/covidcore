@@ -1,5 +1,3 @@
-from werkzeug.exceptions import HTTPException
-
 from flask import Flask
 from flask_restful import Api as _Api
 from flask_sqlalchemy import SQLAlchemy as _BaseSQLAlchemy
@@ -20,6 +18,12 @@ class SQLAlchemy(_BaseSQLAlchemy):
 
 
 app = Flask(__name__, static_folder='static', static_url_path='')
+
+from chatterbot import ChatBot
+
+chatbot = ChatBot("CovidBOT",
+    storage_adapter="chatterbot.storage.SQLStorageAdapter",
+    database_uri=Config.SQLALCHEMY_DATABASE_URI)
 
 
 class Api(_Api):
