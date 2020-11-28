@@ -24,10 +24,6 @@ register_parser.add_argument('password', type=string(empty=False, strip=True),
 register_parser.add_argument('name', type=string(empty=False, strip=True),
     required=True,
     help="Name cannot be blank!")
-register_parser.add_argument('code', type=string(empty=False, strip=True))
-register_parser.add_argument('invitation_code', type=string(empty=False,
-        strip=True))
-
 
 login_parser = reqparse.RequestParser()
 login_parser.add_argument('username', type=string(empty=False, lower=True),
