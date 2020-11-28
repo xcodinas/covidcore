@@ -100,11 +100,18 @@ class AnswerRatingResource(Resource):
         args = rating_parser.parse_args()
         answer = CovidAnswer.query.filter_by(
             user=current_user()).filter_by(id=args.answer).first()
-        if answer:
+        rating = AnswerRating.query.filter_by(
+                user=current_user()).filter_by(
+                    answer=answer).first() if answer else None
+        if answer and not rating:
             db.session.add(AnswerRating(
                     answer=answer,
                     rating=args.rating,
                     user=current_user()))
+            db.session.commit()
+            return jsonify({'success': 1})
+        elif answer and rating:
+            rating.rating = args.rating
             db.session.commit()
             return jsonify({'success': 1})
         return jsonify({'success': 0})
