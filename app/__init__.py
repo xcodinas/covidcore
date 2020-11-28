@@ -50,16 +50,16 @@ jwt = JWTManager(app)
 
 from app.resources.user import (
     UserResource, MeResource, PasswordRecoverResource)
-from app.resources.admin import AdminStatsResource
+from app.resources.medical_center import MedicalCenterResource
 
 # User
-api.add_resource(UserResource, '/v1/users')
-api.add_resource(MeResource, '/v1/users/me')
+api.add_resource(UserResource, '/users')
+api.add_resource(MeResource, '/users/me')
 api.add_resource(PasswordRecoverResource,
     '/password_recover')
 
-# Admin
-api.add_resource(AdminStatsResource, '/admin/stats')
+# Medical Centers
+api.add_resource(MedicalCenterResource, '/medical_centers')
 
 
 from app import utils

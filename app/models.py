@@ -51,4 +51,14 @@ class User(db.Model, TimestampsMixin):
     def verify_hash(password, hash):
         return sha256.verify(password, hash)
 
+
+class MedicalCenter(db.Model, TimestampsMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    location = db.Column(db.String)
+    name = db.Column(db.String)
+    website = db.Column(db.String)
+    contact_methods = db.Column(db.String)
+
+
 User.register()
+MedicalCenter.register()

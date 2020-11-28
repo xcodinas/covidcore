@@ -1,4 +1,6 @@
 import os
+basedir = os.path.abspath(os.path.dirname(__file__))
+
 import datetime
 
 from werkzeug.exceptions import MethodNotAllowed, BadRequest
@@ -6,7 +8,8 @@ from flask_jwt_extended.exceptions import NoAuthorizationError
 
 
 class Config(object):
-    SQLALCHEMY_DATABASE_URI = os.environ.get('COVIDCORE_DATABASE_URL')
+    SQLALCHEMY_DATABASE_URI = os.environ.get('COVIDCORE_DATABASE_URL') or \
+        'sqlite:///' + os.path.join(basedir, 'app.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     TOKEN_EXPIRATION_SECONDS = 3600
     JWT_ACCESS_TOKEN_EXPIRES = datetime.timedelta(days=3)

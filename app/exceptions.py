@@ -61,7 +61,6 @@ def server_error_handler(error):
                 'success': 0,
                 'error': {'message': error.args[0] if error.args else ''},
                 }
-    capture_exception(error)
     return jsonify(message), 500
 
 
@@ -76,7 +75,6 @@ def client_error_handler(error):
             response['error'][data] = error.data[data]
     else:
         response['error'] = error.get_description()
-    capture_exception(error)
     return jsonify(response), 400
 
 

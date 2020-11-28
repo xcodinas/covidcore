@@ -46,3 +46,10 @@ user_fields = {
     'full_name': fields.String,
     'is_expert': fields.Boolean,
 }
+
+medical_center_fields = {
+    'location': fields.String,
+    'name': fields.String,
+    'website': fields.String,
+    'contact_methods': fields.String,
+}
