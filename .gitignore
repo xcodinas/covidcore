@@ -1,0 +1,6 @@
+__pycache__
+*.db
+.idea/*
+app/static/node_modules/*
+.eggs
+.mo

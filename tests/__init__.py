@@ -1,6 +1,6 @@
 try:
-    from covidcore.tests.test_covidcore import suite
+    from deletos_api.tests.test_api import suite
 except ImportError:
-    from .test_covidcore import suite
+    from .test_api import suite
 
 __all__ = ['suite']

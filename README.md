@@ -1,7 +1,16 @@
-# covidcore
+# Deletos API
 
-## Install requiremnts:
+## Database requirements:
+You will need to install postgis and enable it on the api database.
+To do that first you need to install the package:
+
+```sh
+$ sudo apt-get install postgis
+```
+
+## Install requirements:
  ```sh
+$ sudo apt-get install postgi
 $ python setup.py develop
 ```
 
@@ -11,47 +20,27 @@ $ flask db init
 $ flask db migrate
 $ flask db upgrade
 ```
-## Creating an user
-```sh
-$ python manager.py create_user
+
+### Documentation
+In order to make the documentation work you will need to follow these steps:
+
+ ```sh
+$ cd app/static
+$ npm install
 ```
 
-The default admin user will be:
-> admin@admin.com | Admin | admin
-
-If you want a custom email / name / password you should use the function parameters:
-
-```sh
-$ python manager.py create_admin --name admin --email admin@admin.com --pasword admin
+## Testing
+ ```sh
+$ python setup.py test
 ```
 
-In order to connect to the application run the flask development server
-```sh
-$ FLASK_APP=covidcore flask run
-```
-
-## Translations
-
-Generate the translation strings base file
-
-```sh
-$ pybabel extract -F babel.cfg -o messages.pot .
-$ pybabel update -i messages.pot -d app/translations
-```
-
-Init a new translation language
-
-```sh
-$ pybabel init -i messages.pot -d app/translations -l es
-```
-
-Update the language with new strings in base file
-
-```sh
-$ pybabel update -i messages.pot -d app/translations
-```
-Compile the translation files
-
-```sh
-$ pybabel compile -d app/translations
-```
+## Error Codes Notation
+0xx -> Beta
+1xx -> User
+2xx -> Deleto
+3xx -> Notification
+4xx -> Message
+5xx -> Crush
+6xx -> Follow
+7xx -> Demojis
+:D

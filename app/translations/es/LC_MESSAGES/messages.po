@@ -1,0 +1,52 @@
+# Spanish translations for PROJECT.
+# Copyright (C) 2020 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2020-05-14 10:02+0200\n"
+"PO-Revision-Date: 2020-05-14 10:04+0200\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: es\n"
+"Language-Team: es <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.8.0\n"
+
+msgid "@%(username)s has mentioned you."
+msgstr "@%(username)s te ha mencionado"
+
+msgid "You and @%(username)s have a crush."
+msgstr "Tienes un crush con @%(username)s"
+
+msgid "Break the ice!"
+msgstr "¡Rompe el hielo!"
+
+msgid "@%(username)s has redeleted your deleto"
+msgstr "@%(username)s ha redeleteado"
+
+msgid "@%(username)s has doped your deleto"
+msgstr "A @%(username)s le ha rentado"
+
+msgid "@%(username)s has started following you"
+msgstr "@%(username)s te ha seguido"
+
+msgid "Check out his profile!"
+msgstr "¡Echa un ojo a su perfil!"
+
+msgid "@%(username)s has replied to your deleto"
+msgstr "@%(username)s ha comentado"
+
+msgid "Message from @%(username)s"
+msgstr "Mensaje de @%(username)s"
+
+msgid "Message from @%s"
+msgstr "Mensaje de @%s"
+
+msgid "Unlock to read"
+msgstr "Desbloquea para leer"
