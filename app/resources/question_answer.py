@@ -109,9 +109,9 @@ class AnswerRatingResource(Resource):
                     rating=args.rating,
                     user=current_user()))
             db.session.commit()
-            return jsonify({'success': 1})
+            return jsonify({'success': 1, 'new_rating': answer.average_rating})
         elif answer and rating:
             rating.rating = args.rating
             db.session.commit()
-            return jsonify({'success': 1})
+            return jsonify({'success': 1, 'new_rating': answer.average_rating})
         return jsonify({'success': 0})

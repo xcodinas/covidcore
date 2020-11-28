@@ -8,9 +8,6 @@ from flask_mail import Mail
 from flask_jwt_extended import JWTManager
 from flask_babelex import Babel
 
-from chatterbot import ChatBot
-from chatterbot.trainers import ChatterBotCorpusTrainer
-
 from config import Config
 
 
@@ -23,10 +20,6 @@ class SQLAlchemy(_BaseSQLAlchemy):
 
 
 app = Flask(__name__, static_folder='static', static_url_path='')
-
-chatbot = ChatBot("CovidBOT",
-    storage_adapter="chatterbot.storage.SQLStorageAdapter",
-    database_url="sqlite:///database.sqlite3")
 
 
 class Api(_Api):
