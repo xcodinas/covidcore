@@ -64,4 +64,5 @@ question_fields = {
     'question': fields.String,
     'user': fields.Nested(user_fields),
     'answers': fields.List(fields.Nested(answer_fields)),
+    'anon': fields.Boolean,
 }
