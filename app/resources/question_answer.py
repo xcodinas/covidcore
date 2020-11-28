@@ -6,7 +6,7 @@ from flask_jwt_extended import jwt_required
 
 from app.utils import abort, needs_expert, current_user, str2bool
 from app.fields import string, question_fields
-from app.models import CovidQuestion, CovidAnswer
+from app.models import CovidQuestion, CovidAnswer, AnswerRating
 
 from app import db
 
@@ -23,7 +23,14 @@ answer_new_parser.add_argument('answer', type=string(empty=False),
 answer_new_parser.add_argument('question', type=int, required=True)
 
 delete_question_parser = reqparse.RequestParser()
-delete_question_parser.add_argument('id', type=int, required=True)
+delete_question_parser.add_argument('question', type=int, required=True)
+
+delete_answer_parser = reqparse.RequestParser()
+delete_answer_parser.add_argument('answer', type=int, required=True)
+
+rating_parser = reqparse.RequestParser()
+rating_parser.add_argument('rating', type=float, required=True)
+rating_parser.add_argument('answer', type=int, required=True)
 
 
 class QuestionResource(Resource):
@@ -49,7 +56,7 @@ class QuestionResource(Resource):
     def delete(self):
         args = delete_question_parser.parse_args()
         question = CovidQuestion.query.filter_by(
-            user=current_user()).filter_by(id=args.id).first()
+            user=current_user()).filter_by(id=args.question).first()
         if question:
             question.deleted_at = datetime.datetime.now()
             db.session.commit()
@@ -76,11 +83,28 @@ class AnswerResource(Resource):
 
     @jwt_required
     def delete(self):
-        args = delete_question_parser.parse_args()
+        args = delete_answer_parser.parse_args()
         answer = CovidAnswer.query.filter_by(
-            user=current_user()).filter_by(id=args.id).first()
-        if answerer:
+            user=current_user()).filter_by(id=args.answer).first()
+        if answer:
             answer.deleted_at = datetime.datetime.now()
+            db.session.commit()
+            return jsonify({'success': 1})
+        return jsonify({'success': 0})
+
+
+class AnswerRatingResource(Resource):
+
+    @jwt_required
+    def post(self):
+        args = rating_parser.parse_args()
+        answer = CovidAnswer.query.filter_by(
+            user=current_user()).filter_by(id=args.answer).first()
+        if answer:
+            db.session.add(AnswerRating(
+                    answer=answer,
+                    rating=args.rating,
+                    user=current_user()))
             db.session.commit()
             return jsonify({'success': 1})
         return jsonify({'success': 0})

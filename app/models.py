@@ -49,6 +49,9 @@ class User(db.Model, TimestampsMixin):
     answers = db.relationship("CovidAnswer", backref="user",
         lazy='dynamic')
 
+    answer_ratings = db.relationship("AnswerRating", backref="user",
+        lazy='dynamic')
+
     @staticmethod
     def generate_hash(password):
         return sha256.hash(password)
@@ -56,6 +59,14 @@ class User(db.Model, TimestampsMixin):
     @staticmethod
     def verify_hash(password, hash):
         return sha256.verify(password, hash)
+
+    @hybrid_property
+    def answer_rating(self):
+        rating = 0
+        for answer in self.answers.all():
+            if self.answer_ratings.count() > 0:
+                rating += answer.average_rating
+        return (rating / self.answers.count()) if rating else 0
 
 
 class MedicalCenter(db.Model, TimestampsMixin):
@@ -107,5 +118,23 @@ class CovidAnswer(db.Model, TimestampsMixin):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     question_id = db.Column(db.Integer, db.ForeignKey('covid_question.id'))
+    ratings = db.relationship("AnswerRating", backref="answer",
+        lazy='dynamic')
+
+    @hybrid_property
+    def average_rating(self):
+        rating = 0
+        for r in self.ratings.all():
+            rating += r.rating
+        return (rating / self.ratings.count()) if rating else 0
+
+
+class AnswerRating(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+
+    answer_id = db.Column(db.Integer, db.ForeignKey('covid_answer.id'))
+    rating = db.Column(db.Float)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
 User.register()
 MedicalCenter.register()

@@ -45,6 +45,7 @@ user_fields = {
     'username': fields.String,
     'full_name': fields.String,
     'is_expert': fields.Boolean,
+    'answer_rating': fields.Float,
 }
 
 medical_center_fields = {
@@ -65,4 +66,5 @@ question_fields = {
     'user': fields.Nested(user_fields),
     'answers': fields.List(fields.Nested(answer_fields)),
     'anon': fields.Boolean,
+    'average_rating': fields.Float,
 }

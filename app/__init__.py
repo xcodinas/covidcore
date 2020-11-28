@@ -51,7 +51,8 @@ jwt = JWTManager(app)
 from app.resources.user import (
     UserResource, MeResource, PasswordRecoverResource)
 from app.resources.medical_center import MedicalCenterResource
-from app.resources.question_answer import QuestionResource, AnswerResource
+from app.resources.question_answer import (QuestionResource, AnswerResource,
+    AnswerRatingResource)
 
 # User
 api.add_resource(UserResource, '/users')
@@ -65,6 +66,7 @@ api.add_resource(MedicalCenterResource, '/medical_centers')
 # Question Answer
 api.add_resource(QuestionResource, '/questions')
 api.add_resource(AnswerResource, '/questions/answers')
+api.add_resource(AnswerRatingResource, '/questions/answers/rate')
 
 
 from app import utils
