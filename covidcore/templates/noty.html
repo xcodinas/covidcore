@@ -1,0 +1,16 @@
+<link rel="stylesheet" href="//cdn.rawgit.com/needim/noty/77268c46/lib/noty.css">
+<script src="//cdn.rawgit.com/needim/noty/77268c46/lib/noty.min.js"></script>
+<script>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+            new Noty({
+                theme: 'metroui',
+                type: '{{category}}',
+                layout: 'topRight',
+                text: '{{message}}'
+            }).show();
+        {% endfor %}
+      {% endif %}
+{%- endwith %}
+</script>

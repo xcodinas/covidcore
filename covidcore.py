@@ -1,0 +1,1 @@
+from covidcore import app
