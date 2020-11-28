@@ -39,6 +39,23 @@ def needs_user(func):
     return wrapper
 
 
+def needs_expert(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        if (request.headers.get('Authorization')
+                and 'Bearer ' in request.headers.get('Authorization')
+                and decode_token(
+                    request.headers.get('Authorization')[7:]).get(
+                    'type') == 'refresh'):
+            return
+        verify_jwt_in_request_optional()
+        current_user = User.query.filter_by(id=get_jwt_identity()).first()
+        if not current_user.is_expert:
+            return abort(422, message='Permissions needed')
+        return func(*args, **kwargs)
+    return wrapper
+
+
 @needs_user
 def update_last_request(user):
     user.last_request = datetime.datetime.now()

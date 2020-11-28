@@ -17,36 +17,3 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
-
-msgid "@%(username)s has mentioned you."
-msgstr "@%(username)s te ha mencionado"
-
-msgid "You and @%(username)s have a crush."
-msgstr "Tienes un crush con @%(username)s"
-
-msgid "Break the ice!"
-msgstr "¡Rompe el hielo!"
-
-msgid "@%(username)s has redeleted your deleto"
-msgstr "@%(username)s ha redeleteado"
-
-msgid "@%(username)s has doped your deleto"
-msgstr "A @%(username)s le ha rentado"
-
-msgid "@%(username)s has started following you"
-msgstr "@%(username)s te ha seguido"
-
-msgid "Check out his profile!"
-msgstr "¡Echa un ojo a su perfil!"
-
-msgid "@%(username)s has replied to your deleto"
-msgstr "@%(username)s ha comentado"
-
-msgid "Message from @%(username)s"
-msgstr "Mensaje de @%(username)s"
-
-msgid "Message from @%s"
-msgstr "Mensaje de @%s"
-
-msgid "Unlock to read"
-msgstr "Desbloquea para leer"

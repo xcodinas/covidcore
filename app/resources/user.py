@@ -108,8 +108,8 @@ class PasswordRecoverResource(Resource):
         db.session.commit()
         with mail.connect() as conn:
             # Send Email
-            msg = MailMessage("Deletos - Cambiar contraseña",
-                sender=("Deletos", "beta@deletos.app"))
+            msg = MailMessage("Cambiar contraseña",
+                sender=("mail", "mail@mail.com"))
             msg.add_recipient(user.email)
             msg.html = render_template("email/pass_recovery.html",
                 user=user)

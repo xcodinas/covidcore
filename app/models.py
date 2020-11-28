@@ -43,6 +43,12 @@ class User(db.Model, TimestampsMixin):
     # Roles
     is_expert = db.Column(db.Boolean, default=False)
 
+    questions = db.relationship("CovidQuestion", backref="user",
+        lazy='dynamic')
+
+    answers = db.relationship("CovidAnswer", backref="user",
+        lazy='dynamic')
+
     @staticmethod
     def generate_hash(password):
         return sha256.hash(password)
@@ -79,5 +85,27 @@ class TokenBlacklist(db.Model):
         }
 
 
+class CovidQuestion(db.Model, TimestampsMixin):
+    __tablename__ = 'covid_question'
+
+    id = db.Column(db.Integer, primary_key=True)
+    deleted_at = db.Column(db.DateTime)
+    title = db.Column(db.String)
+    question = db.Column(db.String)
+    anon = db.Column(db.Boolean)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    answers = db.relationship('CovidAnswer',
+        foreign_keys='CovidAnswer.question_id',
+        primaryjoin='CovidAnswer.question_id == CovidQuestion.id',
+        backref='question', lazy='dynamic')
+
+
+class CovidAnswer(db.Model, TimestampsMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    answer = db.Column(db.String)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    question_id = db.Column(db.Integer, db.ForeignKey('covid_question.id'))
 User.register()
 MedicalCenter.register()

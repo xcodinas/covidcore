@@ -53,3 +53,15 @@ medical_center_fields = {
     'website': fields.String,
     'contact_methods': fields.String,
 }
+
+answer_fields = {
+    'answer': fields.String,
+    'user': fields.Nested(user_fields),
+}
+
+question_fields = {
+    'title': fields.String,
+    'question': fields.String,
+    'user': fields.Nested(user_fields),
+    'answers': fields.List(fields.Nested(answer_fields)),
+}
