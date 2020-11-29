@@ -12,7 +12,7 @@ from app.models import User, TokenBlacklist
 from app.fields import user_fields, string
 from app.utils import (current_user, valid_email, get_user_tokens,
     add_token_to_database, revoke_token, unrevoke_token, unaccent_sql,
-    str2bool, abort, valid_username)
+    str2bool, abort, valid_username, take)
 
 from config import Config
 

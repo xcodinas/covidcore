@@ -231,3 +231,7 @@ def get_ip_location():
             request.remote_addr))
     j = json.loads(r.text)
     return j['city']
+
+
+def take(n, dict):
+    return list(islice(iterable, n))
