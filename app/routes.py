@@ -1,3 +1,4 @@
+import datetime
 import requests
 
 from flask import jsonify, render_template, request
@@ -167,3 +168,32 @@ def get_news():
     return requests.get('https://newsapi.org/v2/%s?q=%s&language=%s&apiKey=%s'
         % ('top-headlines', 'covid-19', 'es',
             app.config['NEWS_API_KEY'])).json()
+
+@app.route('/today', methods=['GET'])
+def get_data():
+    data = requests.get('https://api.covid19tracking.narrativa.com/api/%s'
+        % datetime.date.today().strftime('%Y-%m-%d')).json()
+    today_data = data['dates'][datetime.date.today().strftime('%Y-%m-%d')]
+    return jsonify({
+            'last_updated': 'today',
+            'spain': {
+                'infected_today': 1,
+                'total_cases': today_data[
+                    'countries']['Spain']['today_confirmed'],
+                'deceased_today': today_data[
+                    'countries']['Spain']['today_deaths'],
+                'deceased_total': 1,
+                'most_cases_comunities': [
+                    {'name': 'Madr', 'cases': 1},
+                    ]
+                },
+            'mr_worldwide': {
+                'infected_active': 1,
+                'total_cases': 1,
+                'recovered': 1,
+                'deceased': 1,
+                'most_cases_countries': [
+                    {'name': 'mad', 'cases': 1},
+                    ]
+                }
+            })
