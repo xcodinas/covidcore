@@ -169,31 +169,58 @@ def get_news():
         % ('top-headlines', 'covid-19', 'es',
             app.config['NEWS_API_KEY'])).json()
 
+
 @app.route('/today', methods=['GET'])
 def get_data():
     data = requests.get('https://api.covid19tracking.narrativa.com/api/%s'
         % datetime.date.today().strftime('%Y-%m-%d')).json()
     today_data = data['dates'][datetime.date.today().strftime('%Y-%m-%d')]
+    top_regions = sorted(today_data['countries']['Spain']['regions'],
+        key=lambda i: (i['today_confirmed']), reverse=True)
+    # Top countries
+    l = []
+    for i in today_data['countries'].items():
+        l.append(list(i)[1])
+    top_countries = take(3, sorted(l,
+        key=lambda i: (i['today_confirmed']), reverse=True))
     return jsonify({
             'last_updated': 'today',
             'spain': {
-                'infected_today': 1,
+                'infected_today': today_data[
+                    'countries']['Spain']['today_new_confirmed'],
                 'total_cases': today_data[
                     'countries']['Spain']['today_confirmed'],
                 'deceased_today': today_data[
+                    'countries']['Spain']['today_new_deaths'],
+                'deceased_total': today_data[
                     'countries']['Spain']['today_deaths'],
-                'deceased_total': 1,
                 'most_cases_comunities': [
-                    {'name': 'Madr', 'cases': 1},
-                    ]
+                    {
+                        'name': top_regions[0]['name'],
+                        'cases': top_regions[0]['today_confirmed']
+                    }, {
+                        'name': top_regions[1]['name'],
+                        'cases': top_regions[1]['today_confirmed']
+                    }, {
+                        'name': top_regions[2]['name'],
+                        'cases': top_regions[2]['today_confirmed']
+                    }]
                 },
             'mr_worldwide': {
-                'infected_active': 1,
-                'total_cases': 1,
-                'recovered': 1,
-                'deceased': 1,
+                'infected_active': data['total']['today_open_cases'],
+                'total_cases': data['total']['today_confirmed'],
+                'recovered': data['total']['today_recovered'],
+                'deceased': data['total']['today_deaths'],
                 'most_cases_countries': [
-                    {'name': 'mad', 'cases': 1},
-                    ]
+                    {
+                        'name': top_countries[0]['name'],
+                        'cases': top_countries[0]['today_confirmed']
+                    }, {
+                        'name': top_countries[1]['name'],
+                        'cases': top_countries[1]['today_confirmed']
+                    }, {
+                        'name': top_countries[2]['name'],
+                        'cases': top_countries[2]['today_confirmed']
+                    }]
                 }
             })

@@ -2,6 +2,7 @@ import json
 import requests
 import datetime
 import re
+from itertools import islice
 from functools import wraps, lru_cache
 
 from sqlalchemy.sql.expression import true
