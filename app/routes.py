@@ -184,7 +184,7 @@ def get_data():
     top_countries = take(3, sorted(l,
         key=lambda i: (i['today_confirmed']), reverse=True))
     return jsonify({
-            'last_updated': 'today',
+            'last_updated': updated_at,
             'spain': {
                 'infected_today': today_data[
                     'countries']['Spain']['today_new_confirmed'],
