@@ -70,8 +70,6 @@ def logout():
     user = current_user()
     args = logout_parser.parse_args()
     # TODO: Delete auth token
-    push_token = UserNotificationToken.query.filter_by(
-        token=args.push_token).first()
     decoded_token = decode_token(request.headers.get('Authorization')[7:])
     token = TokenBlacklist.query.filter_by(jti=decoded_token['jti']).first()
     revoke_token(token.id, user.id)
