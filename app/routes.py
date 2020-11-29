@@ -1,15 +1,20 @@
+import requests
+
 from flask import jsonify, render_template, request
 from flask_jwt_extended import (jwt_required, create_access_token,
     jwt_refresh_token_required, create_refresh_token, decode_token)
 from flask_restful import reqparse, marshal
 
-from app import app, db, chatbot
+from app import app, db, chatbot, newsapi
 from app.exceptions import TokenNotFound
 from app.models import User, TokenBlacklist
 from app.fields import user_fields, string
 from app.utils import (current_user, valid_email, get_user_tokens,
     add_token_to_database, revoke_token, unrevoke_token, unaccent_sql,
     str2bool, abort, valid_username)
+
+from config import Config
+
 
 register_parser = reqparse.RequestParser()
 register_parser.add_argument('email', type=string(email=True, empty=False,
@@ -155,3 +160,10 @@ def get_bot_response():
     if not text:
         return abort(400, 'Missing message parameter')
     return jsonify({'response': str(chatbot.get_response(text))})
+
+
+@app.route('/news', methods=['GET'])
+def get_news():
+    return requests.get('https://newsapi.org/v2/%s?q=%s&language=%s&apiKey=%s'
+        % ('top-headlines', 'covid-19', 'es',
+            app.config['NEWS_API_KEY'])).json()

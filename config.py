@@ -37,3 +37,4 @@ class Config(object):
     MAIL_DEBUG = True
     BABEL_DEFAULT_LOCALE = 'es'
     DEBUG = os.environ.get('TEST_ENV')
+    NEWS_API_KEY = os.environ.get('NEWS_API_KEY')
