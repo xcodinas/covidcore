@@ -152,4 +152,6 @@ def modify_token(token_id):
 @app.route('/chatbot', methods=['GET'])
 def get_bot_response():
     text = request.args.get('message')
+    if not text:
+        return abort(400, 'Missing message parameter')
     return jsonify({'response': str(chatbot.get_response(text))})
