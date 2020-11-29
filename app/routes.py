@@ -5,7 +5,7 @@ from flask_jwt_extended import (jwt_required, create_access_token,
     jwt_refresh_token_required, create_refresh_token, decode_token)
 from flask_restful import reqparse, marshal
 
-from app import app, db, chatbot, newsapi
+from app import app, db, chatbot
 from app.exceptions import TokenNotFound
 from app.models import User, TokenBlacklist
 from app.fields import user_fields, string
@@ -158,7 +158,7 @@ def modify_token(token_id):
 def get_bot_response():
     text = request.args.get('message')
     if not text:
-        return abort(400, 'Missing message parameter')
+        return abort(400, message='Missing message parameter')
     return jsonify({'response': str(chatbot.get_response(text))})
 
 
