@@ -233,5 +233,5 @@ def get_ip_location():
     return j['city']
 
 
-def take(n, dict):
+def take(n, iterable):
     return list(islice(iterable, n))
